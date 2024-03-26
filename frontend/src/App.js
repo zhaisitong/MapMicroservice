@@ -15,7 +15,7 @@ const AppWrapper = styled.div`
 const ContentWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 100px;
   margin-left: auto;
   margin-right: auto;
@@ -26,8 +26,13 @@ const ContentWrapper = styled.div`
 const InputWrapper = styled.div`
   border: 3px solid #89CFF0;
   width: 300px;
+  height: 300px;
   margin: 0 auto;
+  align-items: center;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   div{
     padding: 10px;
     input{
@@ -139,7 +144,7 @@ function App() {
             start_node_id: parseInt(sourceId),
             end_node_id: parseInt(destinationId),
         };
-        axios.post(`http://127.0.0.1:7000/queryPath`, data)
+        axios.post(`https://service-navigation-6qs3wm6dcq-uc.a.run.app/queryPath`, data)
             .then(response => {
                 console.log(response)
                 const path = response.data.join(" -> ");
@@ -182,9 +187,10 @@ function App() {
                     <table>
                         <thead>
                         <tr>
-                            <th>id</th>
-                            <th>x</th>
-                            <th>y</th>
+                            <th>Location ID</th>
+                            <th>Longitude</th>
+                            <th>Latitude</th>
+                            <th>Traffic</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -193,11 +199,12 @@ function App() {
                                 <td>{node.id}</td>
                                 <td>{node.x.toFixed(3)}</td>
                                 <td>{node.y.toFixed(3)}</td>
+                                <td>{node.importance.toFixed(3)}</td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
-                    <table>
+                    {/* <table>
                         <thead>
                         <tr>
                             <th>loc1_id</th>
@@ -214,7 +221,7 @@ function App() {
                             </tr>
                         ))}
                         </tbody>
-                    </table>
+                    </table> */}
                 </TableWrapper>
             </ContentWrapper>
     

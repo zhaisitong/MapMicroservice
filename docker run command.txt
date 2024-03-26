@@ -1,0 +1,4 @@
+docker build -t frontend -f Dockerfile .
+docker run -p 127.0.0.1:3000:80 -it frontend
+docker tag frontend zhaisitong/frontend:latest
+docker push zhaisitong/frontend:latest
